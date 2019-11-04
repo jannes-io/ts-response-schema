@@ -10,7 +10,7 @@ Extends [ts-object-schema](https://github.com/jannes-io/ts-object-schema) with a
 
 Also available on NPM.
 
-[![NPM](https://nodei.co/npm/ts-response-schema)](https://nodei.co/npm/ts-response-schema/)
+[![NPM](https://nodei.co/npm/ts-response-schema.png)](https://nodei.co/npm/ts-response-schema/)
 
 ## Usage
 

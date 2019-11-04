@@ -1,8 +1,8 @@
 # TS Response Schema
 
-Extends ts-object-schema with an apisauce response validator.
+Extends [ts-object-schema](https://github.com/jannes-io/ts-object-schema) with an apisauce response validator.
 
-![License](https://img.shields.io/github/license/jannes-io/ts-object-schema)
+![License](https://img.shields.io/github/license/jannes-io/ts-response-schema)
 [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-blue)](https://www.typescriptlang.org/) 
 [![Code Style](https://badgen.net/badge/code%20style/airbnb/ff5a5f?icon=airbnb)](https://github.com/airbnb/javascript)
 
@@ -10,7 +10,7 @@ Extends ts-object-schema with an apisauce response validator.
 
 Also available on NPM.
 
-[![NPM](https://nodei.co/npm/<TBA>)](https://nodei.co/npm/<TBA>/)
+[![NPM](https://nodei.co/npm/ts-response-schema)](https://nodei.co/npm/ts-response-schema/)
 
 ## Usage
 

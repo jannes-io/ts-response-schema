@@ -1,25 +1,17 @@
-# TS Object Schema
+# TS Response Schema
 
-Quick shallow object schema for strict TS types with **0** dependencies.
+Combines [TS Object Schema](https://www.npmjs.com/package/ts-shallow-object-schema)
+and [apisauce](https://www.npmjs.com/package/apisauce) to create the ultimate type-safe api experience.
 
-![License](https://img.shields.io/github/license/jannes-io/ts-object-schema)
+![License](https://img.shields.io/github/license/jannes-io/ts-response-schema)
 [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-blue)](https://www.typescriptlang.org/) 
 
 ## Usage
 
 ```typescript
-import * as assert from 'assert';
-import validateObject from 'ts-shallow-object-schema';
-
-const testData: unknown = {
-  testString: 'hello',
-  testInt: 5,
-  testObj: {
-    a: 'a',
-    b: 1,
-  },
-  testArr: [1, 2, 3],
-};
+import { Schema } from 'ts-shallow-object-schema';
+import { createApi } from 'apisauce';
+import { curryValidator, validateResponse } from '../';
 
 interface ITest {
   testString: string;
@@ -28,8 +20,6 @@ interface ITest {
   testArr: number[];
   testOptional?: number;
 }
-
-const lengthValidator: (data: ITest) => boolean = (data) => data.testArr.length === 3;
 
 const testSchema: Schema<ITest> = [{
   key: 'testString',
@@ -43,20 +33,31 @@ const testSchema: Schema<ITest> = [{
 }, {
   key: 'testArr',
   type: 'array',
-  customValidator: lengthValidator,
 }, {
   key: 'testOptional',
   type: 'number',
   optional: true,
 }];
 
+const api = createApi({
+  baseURL: 'https://example.com/',
+});
 
-assert.strictEquals(validateObject(testSchema, testData), true); // true
+const testSchemaValidator = curryValidator(testSchema);
 
-const otherSchema: Schema<ITest> = [{
-  key: 'missingKey',
-  type: 'string',
-}, ...testSchema];
+// Example of a valid response:
+const res = validateResponse(testSchemaValidator, api.get(''));
+if (res.ok) {
+  // Strict types now ensure that `res.data` is of type `ITest`
+  // So we can safely use it as such
+  console.log(res.data.testString);
+}
 
-assert.strictEquals(validateObject(otherSchema, testData), false); // true
+// Example of an invalid response
+const res2 = validateResponse(testSchemaValidator, api.get(''));
+if (!res2.ok && res2.data === 'Validation failed') {
+  // Strict types now ensure that the API did return a response.
+  // But the response was not a valid `ITest`
+  console.error('Invalid response', res2);
+}
 ```

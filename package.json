@@ -1,0 +1,47 @@
+{
+  "name": "ts-shallow-object-schema",
+  "version": "0.1.0",
+  "description": "Type check API responses using https://github.com/jannes-io/ts-object-schema",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "private": false,
+  "scripts": {
+    "test": "mocha -r ts-node/register src/__tests__/index.test.ts",
+    "lint": "tslint -p .",
+    "build": "yarn lint && node build.js",
+    "upload": "yarn build && yarn test && cd dist && npm login && npm publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jannes-io/ts-response-schema.git"
+  },
+  "keywords": [
+    "type",
+    "typescript",
+    "api",
+    "response",
+    "schema"
+  ],
+  "author": "Jannes Drijkoningen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jannes-io/ts-object-schema/issues"
+  },
+  "homepage": "https://github.com/jannes-io/ts-object-schema#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.2.0",
+    "nyc": "^14.1.1",
+    "shelljs": "^0.8.3",
+    "ts-node": "^8.3.0",
+    "tslint": "^5.19.0",
+    "tslint-config-airbnb": "^5.11.1",
+    "typescript": "^3.6.3",
+    "@types/chai": "^4.2.2",
+    "@types/mocha": "^5.2.7"
+  },
+  "dependencies": {
+    "apisauce": "^1",
+    "ts-shallow-object-schema": "^0.1"
+  }
+}
